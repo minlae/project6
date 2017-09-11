@@ -1,0 +1,22 @@
+Pseudocode:
+
+User can click on one of three notes on the page: Movies, TV Shows, Books
+Once click on one, card gets an overlay of "See my list" or "Get random" (possibly also option to input new item)
+
+SEE MY LIST:
+If select See my list, card expands to overlay of the chosen category
+Here there is an input field for user to enter new item in that category.
+On the right hand side is a list of items already in category (maybe populated with one default item that user can remove? like "Nothing yet!")
+Next to item is a checkbox labeled "remove" which user can check to remove item
+Whatever user enters into submit field is appended to the list on the right hand side
+If item is removed, it's removed off list
+
+Items are added to a general Firebase database 
+User can click on a done button to close card and be back on screen with selected card
+
+GET RANDOM:
+Random item from the user's list on firebase is displayed on the card
+User has the option to get an alternate item
+Also option to go "back" to first screen with get random, my list, (and input)
+If there are no items, user gets a note that says "sorry no items yet! Go to your list to add some!"
+
