@@ -20,3 +20,9 @@ User has the option to get an alternate item
 Also option to go "back" to first screen with get random, my list, (and input)
 If there are no items, user gets a note that says "sorry no items yet! Go to your list to add some!"
 
+*May need to change MVP if I can't do the code for get random
+
+**Maybe useful: Think of it as a problem to solve. Each step is a problem to solve. Break into simple steps. when you have trouble, try looking it up. If all fails, get some help.
+
+*Start basic skeleton and then as you build can move stuff around.
+*Review notes on Fun-Food-Friends both versions. Should greatly help.
