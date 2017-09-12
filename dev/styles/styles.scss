@@ -1,20 +1,23 @@
 @import "partials/setup";
 @import "partials/variables";
+@import "partials/mixins";
 
 body {
   font-size: 10px; 
   color: white;
-  background: rgba(98,125,77,1);
+  font-family: $sansSerif;
+  // background: rgba(98,125,77,1);
 }
 
 h1 {
   font-size: 4.0rem;
+  font-family: $sansSerif;
   // color: green;
 }
 
 header {
   height: 100vh;
-  // background-color: lightyellow;
+  background-color: $mainTeal;
 }
 
 .hidden {
@@ -23,23 +26,27 @@ header {
 
 .wrapper {
   display: flex;
+  max-width: 1000px;
+  margin: 0 auto;
   flex-direction: column;
   align-items: center;
-  // border: 1px solid blue;
+  border: 1px solid blue;
 }
 
 .container {
   display: flex;
   justify-content: space-between;
-  width: 50%;
-  border: 1px solid pink;
+  width: 100%;
+  // border: 1px solid pink;
 }
 
+
+
 .titleCard {
-  height: 300px;
+  // height: 300px;
   // NB Won't need the height later - can use padding and margin from buttons
   width: 30%;
-  border: 1px solid green;
+  // border: 1px solid green;
 
     h2 {
       text-align: center;
@@ -47,10 +54,36 @@ header {
 
     .titleButton {
       width: 100%;
+      color: $nearBlack;
+      background-color: $goldAccent;
+      font-size: 1.5rem;
+      padding: 10px;
+      border: none;
+      box-shadow: 6px 6px 18px -5px rgba(0,0,0,0.75);
+      margin-bottom: 50px;
+      transition: .5s all;
+      &:hover {
+        background-color: white;
+        // darken($goldAccent,30)
+      }
+    }
+
+    .myListButton {
+      width: 100%;
+      color: $nearBlack;
       background-color: white;
       font-size: 1.5rem;
       padding: 10px;
       border: none;
       box-shadow: 6px 6px 18px -5px rgba(0,0,0,0.75);
+      margin-bottom: 50px;
+      transition: .5s all;
+      &:hover {
+        background-color: $goldAccent;
+      }
     }
+}
+
+.removeButton {
+  width: 100px;
 }

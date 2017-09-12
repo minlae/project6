@@ -2,47 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // import Header from './Header.js';
 import firebase from './firebase';
-// note no need to add .js to Header and firebase above. They're optional. npm assumes you'll have it.
-
-// FIRST STEP: Make one workign card and one working title list. Minimum styling.
-
-// PSEUDOCODE PART 1:
-// When you click a titleCard you get the 2nd display: get random or see my list.
-	// Two more buttons appear to replace button
-	// Event: on mouseOver ?
-	// So then the h2s within title cards will have to be buttons. Or the title cards themselves have to be buttons.
-	// Try creating the button first and putting it in the div as the h2, then if that works, see if you can do it for the card.
-
-// Create card component
-	// needs state
-	// when click on movie button, your state is going to swap between true and false for "toggleButtons" Based on whether or not state is true or false, you will see the buttons or not.
-// Render: True or False logic, if toggleButtons true then show buttons else no buttons
-// click on button and two buttons show up
-
-// 2. When you hit See My List:
-// Section expands into an overlay with a completely new screen
-	// Buttons are hidden, replaced with a "done" button
-		// done button removes the section and brings you back to card with get random and see my list buttons
-
-// to make things simpler: 
-	// Want to hide something and want to display something else
-	// same logic as hidden button toggle
-
-// Essential for today:
-// finish todo list movies - then figure out how to apply to other subjects
-// how to hide the buttons / how button hides itself? I think I get the logic but...
-// code to spit out random movie. At least have it work for one card.
-// at least have one other card - so movies and books. That way know how to set up two. And then the random generator thing.
-// Third I can do at home or once CSS is done...
+import { Modal, ModalMixin, ModalEventsMixin } from 'react-modal-box';
 
 const HiddenButton = (props) => {
 		return (
 			<div>
-				{/*<button>Get Random</button>*/}
 				<MyList type={props.type} />
 			</div>
 		);
 }
+
+
+// when clicked looks at array of items in its component's state
+// takes a random item from that array
+// renders the random item to the page
+// ideally called on the title page... before you hit the My List button
+
+// method in the specific component? 
+// 
+
 
 // Shows Form
 class ShowForm extends React.Component {
@@ -113,7 +91,7 @@ class ShowForm extends React.Component {
 							return (
 								<li key={item.id}>
 									<h3>{item.rec}</h3>
-									<button onClick={() => this.removeItem(item.id)}>Remove Item</button>
+									<button className="removeButton" onClick={() => this.removeItem(item.id)}>Remove Item</button>
 								</li>
 							)
 						})}
@@ -194,7 +172,7 @@ class BookForm extends React.Component {
 							return (
 								<li key={item.id}>
 									<h3>{item.rec}</h3>
-									<button onClick={() => this.removeItem(item.id)}>Remove Item</button>
+									<button className="removeButton" onClick={() => this.removeItem(item.id)}>Remove Item</button>
 								</li>
 							)
 						})}
@@ -228,6 +206,11 @@ class MovieForm extends React.Component {
 					rec: items[item].rec,
 					// what is this doing? creating an array of objects in the Firebase database
 				});
+			}
+			if (this.props.random === true) {
+				const randomIndex = Math.round(Math.random() * newState.length);
+				const randomItem = newState[randomIndex];
+				newState = [randomItem];
 			}
 			this.setState({
 				items: newState
@@ -263,23 +246,27 @@ class MovieForm extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="listFadeIn">
+				{this.props.random === false && (
 				<form onSubmit={this.handleSubmit}>
 					<input required type="text" name="movieInput" placeholder="enter movie name" onChange={this.handleChange} value={this.state.movieInput}/>
 					<button>Add Movie</button>
-				</form>
-				<div className="movieList">
-					<ul>
-						{this.state.items.map((item) => {
-							return (
-								<li key={item.id}>
-									<h3>{item.rec}</h3>
-									<button onClick={() => this.removeItem(item.id)}>Remove Item</button>
-								</li>
-							)
-						})}
-					</ul>
-				</div>
+				</form>)}
+					<div className="movieList">
+						<ul>
+							{this.state.items.map((item) => {
+								return (
+									<div>
+										<Modal />
+										<li key={item.id}>
+											<h3>{item.rec}</h3>
+										 	<button className="removeButton" onClick={() => this.removeItem(item.id)}>Remove Item</button>
+										</li>
+									</div>
+								)
+							})}
+						</ul>
+					</div>
 			</div>
 		)
 	}
@@ -289,10 +276,13 @@ class MyList extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			showListSection: false
+			showListSection: false,
+			showRandomItem: false,
 		}
 		this.handleClick = this.handleClick.bind(this);
 		this.formToShow = this.formToShow.bind(this);
+		this.randomItemToShow = this.randomItemToShow.bind(this);
+		this.showRandom = this.showRandom.bind(this);
 	}
 
 	handleClick() {
@@ -307,21 +297,44 @@ class MyList extends React.Component {
 		}
 	}
 
+	showRandom() {
+		if (this.state.showRandomItem === false) {
+			this.setState( {
+				showRandomItem: true
+			});
+		} else {
+			this.setState( {
+				showRandomItem: false
+			})
+		}
+	}
+
+	randomItemToShow() {
+		if (this.props.type === "Movies") {
+			return <MovieForm random={true} />
+		} else if (this.props.type === "Shows"){
+			return <ShowForm random={true} />
+		} else {
+			return <BookForm random={true} />
+		}
+	}
 	formToShow() {
 		if (this.props.type === "Movies") {
-			return <MovieForm />
+			return <MovieForm random={false} />
 		} else if (this.props.type === "Shows"){
-			return <ShowForm />
+			return <ShowForm random={false} />
 		} else {
-			return <BookForm />
+			return <BookForm random={false} />
 		}
 	}
 
 	render() {
-		console.log(typeof this.props.type);
+		// console.log(typeof this.props.type);
 		return (
 			<div className="myList">
-				<button className="titleButton" onClick={this.handleClick}>See My List</button>
+				<button onClick={this.showRandom}>Get Random</button>
+				<button className="myListButton" onClick={this.handleClick}>See My List</button>
+				{this.state.showRandomItem ? this.randomItemToShow() : null}
 				{this.state.showListSection ? this.formToShow() : null}
 				{/*above says: if the state of ShowListSection is true, show BookForm, else nothing*/}
 			</div>
@@ -354,6 +367,7 @@ class TitleCard extends React.Component {
 		}
 	}
 	render() {
+		// when click on it, section expands? or is displayed in a big div(?) that sits on top of everything
 		return (
 			<div className="titleCard">
 				<button className="titleButton" onClick={this.handleClick}>{this.props.title}</button>
