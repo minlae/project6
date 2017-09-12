@@ -104,7 +104,7 @@ class ShowForm extends React.Component {
 		return (
 			<div>
 				<form onSubmit={this.handleSubmit}>
-					<input type="text" name="showInput" placeholder="enter show name" onChange={this.handleChange} value={this.props.showInput}/>
+					<input required type="text" name="showInput" placeholder="enter show name" onChange={this.handleChange} value={this.state.showInput}/>
 					<button>Add Show</button>
 				</form>
 				<div className="showList">
@@ -185,7 +185,7 @@ class BookForm extends React.Component {
 		return (
 			<div>
 				<form onSubmit={this.handleSubmit}>
-					<input type="text" name="bookInput" placeholder="enter book name" onChange={this.handleChange} value={this.props.bookInput}/>
+					<input required type="text" name="bookInput" placeholder="enter book name" onChange={this.handleChange} value={this.state.bookInput}/>
 					<button>Add Book</button>
 				</form>
 				<div className="bookList">
@@ -265,7 +265,7 @@ class MovieForm extends React.Component {
 		return (
 			<div>
 				<form onSubmit={this.handleSubmit}>
-					<input type="text" name="movieInput" placeholder="enter movie name" onChange={this.handleChange} value={this.props.movieInput}/>
+					<input required type="text" name="movieInput" placeholder="enter movie name" onChange={this.handleChange} value={this.state.movieInput}/>
 					<button>Add Movie</button>
 				</form>
 				<div className="movieList">
