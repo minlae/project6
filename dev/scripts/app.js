@@ -35,19 +35,97 @@ import firebase from './firebase';
 // at least have one other card - so movies and books. That way know how to set up two. And then the random generator thing.
 // Third I can do at home or once CSS is done...
 
-const HiddenButton = () => {
+const HiddenButton = (props) => {
 		return (
 			<div>
-				<button>Get Random</button>
-				<MyList />
+				{/*<button>Get Random</button>*/}
+				<MyList type={props.type} />
 			</div>
-			// <button id="myList">See My List</button>
-			// the above should be separate components I think... like buttons that then have their own state?
 		);
 }
 
-// Can modify this to apply to any input: tv show or book. Just sub in variables somehow? Or through props?
-// QUESTION: How to add multiple constructors... so needs to be separate component? E.g. This form vs the app one below... Hope I'm doing this right.
+// Book Form
+class BookForm extends React.Component {
+	constructor() {
+		super();
+		this.state = {
+			bookInput: "",
+			items: [],
+		}
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+
+	componentDidMount() {
+		const itemsRef = firebase.database().ref("books");
+		itemsRef.on("value", (snapshot) =>{
+			let items = snapshot.val();
+			let newState = [];
+			for (let item in items) {
+				newState.push({
+					id: item,
+					rec: items[item].rec,
+					// what is this doing? creating an array of objects in the Firebase database
+				});
+			}
+			this.setState({
+				items: newState
+			});
+			// console.log(newState)
+			// console.log(this.state.items);
+			// the second console log (this.state) is one item behind the (newState). What?
+		});
+	}
+
+	removeItem(itemId) {
+		const itemRef = firebase.database().ref(`/books/${itemId}`)
+		itemRef.remove();
+	}
+
+	handleChange(e) {
+		this.setState({
+			[e.target.name]: e.target.value
+		});
+	}
+
+	handleSubmit(e) {
+		e.preventDefault();
+		const itemsRef = firebase.database().ref("books");
+		const item = {
+			rec: this.state.bookInput,
+		}
+		itemsRef.push(item);
+		this.setState({
+			bookInput: "",
+		})
+	}
+
+	render() {
+		return (
+			<div>
+				<form onSubmit={this.handleSubmit}>
+					<input type="text" name="bookInput" placeholder="enter book name" onChange={this.handleChange} value={this.props.bookInput}/>
+					<button>Add Book</button>
+				</form>
+				<div className="bookList">
+					<ul>
+						{this.state.items.map((item) => {
+							return (
+								<li key={item.id}>
+									<h3>{item.rec}</h3>
+									<button onClick={() => this.removeItem(item.id)}>Remove Item</button>
+								</li>
+							)
+						})}
+					</ul>
+				</div>
+			</div>
+		)
+	}
+}
+
+
+
 class MovieForm extends React.Component {
 	constructor() {
 		super();
@@ -74,8 +152,8 @@ class MovieForm extends React.Component {
 			this.setState({
 				items: newState
 			});
-			console.log(newState)
-			console.log(this.state.items);
+			// console.log(newState)
+			// console.log(this.state.items);
 			// the second console log (this.state) is one item behind the (newState). What?
 		});
 	}
@@ -112,7 +190,6 @@ class MovieForm extends React.Component {
 				</form>
 				<div className="movieList">
 					<ul>
-						{console.log(this.state.items)}
 						{this.state.items.map((item) => {
 							return (
 								<li key={item.id}>
@@ -127,7 +204,6 @@ class MovieForm extends React.Component {
 		)
 	}
 }
-
 
 
 class MyList extends React.Component {
@@ -150,11 +226,26 @@ class MyList extends React.Component {
 			});
 		}
 	}
+
 	render() {
+		console.log(typeof this.props.type);
+		// let button = "";
+		// if (this.showListSection = true) {
+		// 	button = (
+		// 		<div>
+		// 		<button className="titleButton" onClick={this.handleClick}>See My List</button>
+		// 				<BookForm />
+		// 		</div>
+		// 	)
+		// }
+
+		// you need to use an if/then (or ternary operator) to display list from BookForm (have to create that component) rather than MovieForm component. Because right now you're getting list from BooksForm.
+		// if this.props.type == "Books" show books else if this.props.type=="Movies" show movies else null?
 		return (
 			<div className="myList">
-				<button onClick={this.handleClick}>See My List</button>
-				{this.state.showListSection ? <MovieForm /> : null}
+				<button className="titleButton" onClick={this.handleClick}>See My List</button>
+				{this.state.showListSection ? <BookForm /> : null }
+				{/*above says: if the state of ShowListSection is true, show BookForm, else nothing */}
 			</div>
 		)
 	}
@@ -188,12 +279,11 @@ class TitleCard extends React.Component {
 	render() {
 		return (
 			<div className="titleCard">
-				<button onClick={this.handleClick}>Movies</button>
-				{this.state.showHidden ? <div><HiddenButton /></div> : null}
+				<button className="titleButton" onClick={this.handleClick}>{this.props.title}</button>
+				{this.state.showHidden ? <div><HiddenButton type={this.props.title} /></div> : null}
 			</div>
 		)
 	}
-
 }
 
 
@@ -206,13 +296,8 @@ class App extends React.Component {
 					<div className='wrapper'>
 						<h1>Keeping Track of Your Recs</h1>
 						<div className="container">
-              				<TitleCard />
-	              			<div>
-	              				<h2>Shows</h2>
-	              			</div>
-	              			<div>
-	              				<h2>Books</h2>
-	              			</div>
+              				<TitleCard title="Movies"/>
+	              			<TitleCard title="Books"/>
 						</div>
 					</div>
 				</header>
