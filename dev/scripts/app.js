@@ -48,14 +48,41 @@ const HiddenButton = () => {
 
 // Can modify this to apply to any input: tv show or book. Just sub in variables somehow? Or through props?
 // QUESTION: How to add multiple constructors... so needs to be separate component? E.g. This form vs the app one below... Hope I'm doing this right.
-class Form extends React.Component {
+class MovieForm extends React.Component {
 	constructor() {
 		super();
 		this.state = {
 			movieInput: "",
+			items: [],
 		}
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+
+	componentDidMount() {
+		const itemsRef = firebase.database().ref("movies");
+		itemsRef.on("value", (snapshot) =>{
+			let items = snapshot.val();
+			let newState = [];
+			for (let item in items) {
+				newState.push({
+					id: item,
+					rec: items[item].rec,
+					// what is this doing? creating an array of objects in the Firebase database
+				});
+			}
+			this.setState({
+				items: newState
+			});
+			console.log(newState)
+			console.log(this.state.items);
+			// the second console log (this.state) is one item behind the (newState). What?
+		});
+	}
+
+	removeItem(itemId) {
+		const itemRef = firebase.database().ref(`/movies/${itemId}`)
+		itemRef.remove();
 	}
 
 	handleChange(e) {
@@ -78,31 +105,30 @@ class Form extends React.Component {
 
 	render() {
 		return (
-			<form onSubmit={this.handleSubmit}>
-				<input type="text" name="movieInput" placeholder="enter movie name" onChange={this.props.handleChange} value={this.props.movieInput}/>
-				<button>Add Movie</button>
-			</form>
+			<div>
+				<form onSubmit={this.handleSubmit}>
+					<input type="text" name="movieInput" placeholder="enter movie name" onChange={this.handleChange} value={this.props.movieInput}/>
+					<button>Add Movie</button>
+				</form>
+				<div className="movieList">
+					<ul>
+						{console.log(this.state.items)}
+						{this.state.items.map((item) => {
+							return (
+								<li key={item.id}>
+									<h3>{item.rec}</h3>
+									<button onClick={() => this.removeItem(item.id)}>Remove Item</button>
+								</li>
+							)
+						})}
+					</ul>
+				</div>
+			</div>
 		)
 	}
-
 }
 
 
-class MovieSection extends React.Component {
-		// make a state - similar to To Do List
-		// then bring in info from Firebase - again similar to Fun Food Friends
-		render() {
-			return (
-				<div>
-					<Form 
-						handleChange={this.handleChange}
-						handleSubmit={this.handleSubmit}
-						// movieInput={this.state.movieInput}
-					/>
-				</div>
-			)
-		}
-}
 
 class MyList extends React.Component {
 	constructor() {
@@ -128,7 +154,7 @@ class MyList extends React.Component {
 		return (
 			<div className="myList">
 				<button onClick={this.handleClick}>See My List</button>
-				{this.state.showListSection ? <MovieSection /> : null}
+				{this.state.showListSection ? <MovieForm /> : null}
 			</div>
 		)
 	}
