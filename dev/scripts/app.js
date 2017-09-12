@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import Header from './Header.js';
-// import firebase from './firebase';
+import firebase from './firebase';
 // note no need to add .js to Header and firebase above. They're optional. npm assumes you'll have it.
 
 // FIRST STEP: Make one workign card and one working title list. Minimum styling.
@@ -25,9 +25,15 @@ import ReactDOM from 'react-dom';
 		// done button removes the section and brings you back to card with get random and see my list buttons
 
 // to make things simpler: 
-	// Want to hide something and wan to display something else
+	// Want to hide something and want to display something else
 	// same logic as hidden button toggle
 
+// Essential for today:
+// finish todo list movies - then figure out how to apply to other subjects
+// how to hide the buttons / how button hides itself? I think I get the logic but...
+// code to spit out random movie. At least have it work for one card.
+// at least have one other card - so movies and books. That way know how to set up two. And then the random generator thing.
+// Third I can do at home or once CSS is done...
 
 const HiddenButton = () => {
 		return (
@@ -40,13 +46,59 @@ const HiddenButton = () => {
 		);
 }
 
+// Can modify this to apply to any input: tv show or book. Just sub in variables somehow? Or through props?
+// QUESTION: How to add multiple constructors... so needs to be separate component? E.g. This form vs the app one below... Hope I'm doing this right.
+class Form extends React.Component {
+	constructor() {
+		super();
+		this.state = {
+			movieInput: "",
+		}
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+
+	handleChange(e) {
+		this.setState({
+			[e.target.name]: e.target.value
+		});
+	}
+
+	handleSubmit(e) {
+		e.preventDefault();
+		const itemsRef = firebase.database().ref("movies");
+		const item = {
+			rec: this.state.movieInput,
+		}
+		itemsRef.push(item);
+		this.setState({
+			movieInput: "",
+		})
+	}
+
+	render() {
+		return (
+			<form onSubmit={this.handleSubmit}>
+				<input type="text" name="movieInput" placeholder="enter movie name" onChange={this.props.handleChange} value={this.props.movieInput}/>
+				<button>Add Movie</button>
+			</form>
+		)
+	}
+
+}
+
+
 class MovieSection extends React.Component {
 		// make a state - similar to To Do List
 		// then bring in info from Firebase - again similar to Fun Food Friends
 		render() {
 			return (
 				<div>
-					<h2>Movie Section</h2>
+					<Form 
+						handleChange={this.handleChange}
+						handleSubmit={this.handleSubmit}
+						// movieInput={this.state.movieInput}
+					/>
 				</div>
 			)
 		}
