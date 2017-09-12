@@ -44,6 +44,87 @@ const HiddenButton = (props) => {
 		);
 }
 
+// Shows Form
+class ShowForm extends React.Component {
+	constructor() {
+		super();
+		this.state = {
+			showInput: "",
+			items: [],
+		}
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+
+	componentDidMount() {
+		const itemsRef = firebase.database().ref("shows");
+		itemsRef.on("value", (snapshot) =>{
+			let items = snapshot.val();
+			let newState = [];
+			for (let item in items) {
+				newState.push({
+					id: item,
+					rec: items[item].rec,
+					// what is this doing? creating an array of objects in the Firebase database
+				});
+			}
+			this.setState({
+				items: newState
+			});
+			// console.log(newState)
+			// console.log(this.state.items);
+			// the second console log (this.state) is one item behind the (newState). What?
+		});
+	}
+
+	removeItem(itemId) {
+		const itemRef = firebase.database().ref(`/shows/${itemId}`)
+		itemRef.remove();
+	}
+
+	handleChange(e) {
+		this.setState({
+			[e.target.name]: e.target.value
+		});
+	}
+
+	handleSubmit(e) {
+		e.preventDefault();
+		const itemsRef = firebase.database().ref("shows");
+		const item = {
+			rec: this.state.showInput,
+		}
+		itemsRef.push(item);
+		this.setState({
+			showInput: "",
+		})
+	}
+
+	render() {
+		return (
+			<div>
+				<form onSubmit={this.handleSubmit}>
+					<input type="text" name="showInput" placeholder="enter show name" onChange={this.handleChange} value={this.props.showInput}/>
+					<button>Add Show</button>
+				</form>
+				<div className="showList">
+					<ul>
+						{this.state.items.map((item) => {
+							return (
+								<li key={item.id}>
+									<h3>{item.rec}</h3>
+									<button onClick={() => this.removeItem(item.id)}>Remove Item</button>
+								</li>
+							)
+						})}
+					</ul>
+				</div>
+			</div>
+		)
+	}
+}
+
+
 // Book Form
 class BookForm extends React.Component {
 	constructor() {
@@ -125,7 +206,6 @@ class BookForm extends React.Component {
 }
 
 
-
 class MovieForm extends React.Component {
 	constructor() {
 		super();
@@ -205,7 +285,6 @@ class MovieForm extends React.Component {
 	}
 }
 
-
 class MyList extends React.Component {
 	constructor() {
 		super();
@@ -213,6 +292,7 @@ class MyList extends React.Component {
 			showListSection: false
 		}
 		this.handleClick = this.handleClick.bind(this);
+		this.formToShow = this.formToShow.bind(this);
 	}
 
 	handleClick() {
@@ -227,30 +307,27 @@ class MyList extends React.Component {
 		}
 	}
 
+	formToShow() {
+		if (this.props.type === "Movies") {
+			return <MovieForm />
+		} else if (this.props.type === "Shows"){
+			return <ShowForm />
+		} else {
+			return <BookForm />
+		}
+	}
+
 	render() {
 		console.log(typeof this.props.type);
-		// let button = "";
-		// if (this.showListSection = true) {
-		// 	button = (
-		// 		<div>
-		// 		<button className="titleButton" onClick={this.handleClick}>See My List</button>
-		// 				<BookForm />
-		// 		</div>
-		// 	)
-		// }
-
-		// you need to use an if/then (or ternary operator) to display list from BookForm (have to create that component) rather than MovieForm component. Because right now you're getting list from BooksForm.
-		// if this.props.type == "Books" show books else if this.props.type=="Movies" show movies else null?
 		return (
 			<div className="myList">
 				<button className="titleButton" onClick={this.handleClick}>See My List</button>
-				{this.state.showListSection ? <BookForm /> : null }
-				{/*above says: if the state of ShowListSection is true, show BookForm, else nothing */}
+				{this.state.showListSection ? this.formToShow() : null}
+				{/*above says: if the state of ShowListSection is true, show BookForm, else nothing*/}
 			</div>
 		)
 	}
 }
-
 
 class TitleCard extends React.Component {	
 	// display two previously hidden buttons: Get Random and My List
@@ -297,6 +374,7 @@ class App extends React.Component {
 						<h1>Keeping Track of Your Recs</h1>
 						<div className="container">
               				<TitleCard title="Movies"/>
+	              			<TitleCard title="Shows"/>
 	              			<TitleCard title="Books"/>
 						</div>
 					</div>
