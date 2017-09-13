@@ -369,7 +369,6 @@ class TitleCard extends React.Component {
 		}
 	}
 	render() {
-		// when click on it, section expands? or is displayed in a big div(?) that sits on top of everything
 		return (
 			<div className="titleCard">
 				<button className="titleButton" onClick={this.handleClick}>{this.props.title}</button>
@@ -387,7 +386,8 @@ class App extends React.Component {
 			<div className="app">
 				<header>
 					<div className="wrapper">
-						<h1>Keeping Track of Your Recs</h1>
+						<h1>Rec Lists</h1>
+						<h2>Keep track of your movie, tv, and book recommendations</h2>
 					</div>
 				</header>
 				<section className="main wrapper">

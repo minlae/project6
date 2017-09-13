@@ -1,13 +1,23 @@
 .container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
+
+  @include respond-to("medium") {
+    flex-direction: column;
+    align-items: center;
+  }
+  @include respond-to("small") {
+    flex-direction: column;
+  }
+  
 }
 
 .mainList {
   display: flex;
   flex-direction: column;
-  background-color: $goldAccent;
+  background-color: lighten($goldAccent,5);
   box-shadow: 6px 6px 18px -5px rgba(0,0,0,0.75);
 
   form {
@@ -23,13 +33,16 @@
       padding: 10px;
     }
   }
-  
+
   .inputField  {
     width: 100%;
     padding: 10px;
     font-size: 1.2rem;
     text-align: center;
     margin-top: 20px;
+    // @include respond-to("medium") {
+    //   margin-bottom: 20px;
+    // }
   }
 
   .itemsList {
@@ -44,9 +57,16 @@
 
 }
 
-
 .titleCard {
   width: 30%;
+
+  @include respond-to("medium") {
+    width: 80%;
+  }
+  @include respond-to ("small") {
+    width: 100%;
+  }
+
 
 }
 

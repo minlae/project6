@@ -11,12 +11,18 @@
   &:hover {
     background-color: darken($mainRed,15);
   }
+
+  @include respond-to("medium") {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
 }
 
 .getRandomButton {
   width: 100%;
   color: white;
-  background-color: darken($goldAccent,8);
+  background-color: darken($goldAccent,20);
   font-size: 1.5rem;
   padding: 10px;
   border: none;
@@ -38,6 +44,10 @@
   background-color: black;
   border: none;
   color: white;
+  @include respond-to("medium") {
+    // margin-bottom: 20px;
+    margin-top: 10px;
+  }
 }
 
 .removeButton {
