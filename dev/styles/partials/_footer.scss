@@ -1,0 +1,11 @@
+footer {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+
+	p {
+		font-size: 1rem;
+		font-family: $sansSerif;
+		color: black;
+	}
+}

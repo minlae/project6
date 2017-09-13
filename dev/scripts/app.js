@@ -13,7 +13,7 @@ const HiddenButton = (props) => {
 }
 
 
-// Shows Form
+// TV Shows Component
 class ShowForm extends React.Component {
 	constructor() {
 		super();
@@ -99,7 +99,7 @@ class ShowForm extends React.Component {
 }
 
 
-// Book Form
+// Books Component
 class BookForm extends React.Component {
 	constructor() {
 		super();
@@ -120,7 +120,6 @@ class BookForm extends React.Component {
 				newState.push({
 					id: item,
 					rec: items[item].rec,
-					// what is this doing? creating an array of objects in the Firebase database
 				});
 			}
 			if (this.props.random === true) {
@@ -131,9 +130,6 @@ class BookForm extends React.Component {
 			this.setState({
 				items: newState
 			});
-			// console.log(newState)
-			// console.log(this.state.items);
-			// the second console log (this.state) is one item behind the (newState). What?
 		});
 	}
 
@@ -187,7 +183,7 @@ class BookForm extends React.Component {
 	}
 }
 
-
+// Movies Component
 class MovieForm extends React.Component {
 	constructor() {
 		super();
@@ -208,7 +204,6 @@ class MovieForm extends React.Component {
 				newState.push({
 					id: item,
 					rec: items[item].rec,
-					// what is this doing? creating an array of objects in the Firebase database
 				});
 			}
 			if (this.props.random === true) {
@@ -219,9 +214,6 @@ class MovieForm extends React.Component {
 			this.setState({
 				items: newState
 			});
-			// console.log(newState)
-			// console.log(this.state.items);
-			// the second console log (this.state) is one item behind the (newState). What?
 		});
 	}
 
@@ -332,7 +324,6 @@ class MyList extends React.Component {
 	}
 
 	render() {
-		// console.log(typeof this.props.type);
 		return (
 			<div className="myList">
 				<button className="getRandomButton" onClick={this.showRandom}>Get Random</button>
@@ -397,6 +388,9 @@ class App extends React.Component {
 	          			<TitleCard title="Books"/>
 					</div>
 				</section>
+				<footer>
+					<p>&copy; 2017 Milena Djokic</p>
+				</footer>
 			
 			</div>
 		);

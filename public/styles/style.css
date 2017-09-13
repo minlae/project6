@@ -132,6 +132,27 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
+header {
+  background: url("../../images/header_image.jpg");
+  background-position: 4% 20%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  padding-top: 70px;
+  padding-bottom: 70px; }
+  @media (max-width: 768px) {
+    header {
+      background-size: 100% 100%;
+      padding: 0; } }
+
+footer {
+  width: 100%;
+  display: flex;
+  justify-content: center; }
+  footer p {
+    font-size: 1rem;
+    font-family: "Lato", sans-serif;
+    color: black; }
+
 body {
   font-size: 10px;
   color: white;
@@ -162,18 +183,6 @@ h2 {
       text-align: center;
       padding-bottom: 30px; } }
 
-header {
-  background: url("../../images/header_image.jpg");
-  background-position: 4% 20%;
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-  padding-top: 70px;
-  padding-bottom: 70px; }
-  @media (max-width: 768px) {
-    header {
-      background-size: 100% 100%;
-      padding: 0; } }
-
 .hidden {
   display: none; }
 
@@ -188,7 +197,8 @@ header {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 100%; }
+  width: 100%;
+  margin-bottom: 240px; }
   @media (max-width: 768px) {
     .container {
       flex-direction: column;

@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
+  margin-bottom: 240px;
 
   @include respond-to("medium") {
     flex-direction: column;

@@ -33,20 +33,6 @@ h2 {
   }
 }
 
-header {
-  background: url("../../images/header_image.jpg");
-  background-position: 4% 20%;
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-  padding-top: 70px;
-  padding-bottom: 70px;
-
-  @include respond-to("medium") {
-    background-size: 100% 100%;
-    padding: 0;
-  }
-}
-
 .hidden {
   display: none;
 }
