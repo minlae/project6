@@ -1,78 +1,8 @@
 @import "partials/setup";
+
 @import "partials/variables";
 @import "partials/mixins";
-@import "partials/itemslist";
+
+@import "partials/global";
+@import "partials/itemscard";
 @import "partials/buttons";
-
-body {
-  font-size: 10px; 
-  color: white;
-  font-family: $sansSerif;
-  background: $mainTeal;
-}
-
-h1 {
-  font-size: 4.0rem;
-  font-family: $sansSerif;
-  margin-bottom: 100px;
-  // color: green;
-}
-
-header {
-  // height: 50vh;
-  background-color: yellow;
-}
-
-.hidden {
-  display: none;
-}
-
-.wrapper {
-  display: flex;
-  max-width: 1000px;
-  margin: 0 auto;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid blue;
-}
-
-.container {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  // border: 1px solid pink;
-}
-
-.mainList {
-  border: 1px solid purple;
-
-  ul {
-    padding: 0;
-    list-style: none;
-  }
-}
-
-.itemsList {
-  border: 1px solid red;
-  display: flex;
-  font-size: 1.2rem;
-  font-family: $sansSerif;
-
-}
-
-.itemsContainer {
-  border: 1px solid blue;
-}
-
-.titleCard {
-  // height: 300px;
-  // NB Won't need the height later - can use padding and margin from buttons
-  width: 30%;
-  // border: 1px solid green;
-
-    h2 {
-      text-align: center;
-    }
-}
-
-// style form input so that first letter is capitalized

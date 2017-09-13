@@ -1,0 +1,32 @@
+body {
+  font-size: 10px; 
+  color: white;
+  font-family: $sansSerif;
+  background: $mainTeal;
+}
+
+h1 {
+  font-size: 4.0rem;
+  font-family: $sansSerif;
+  color: $mainRed;
+  margin-bottom: 100px;
+  text-shadow: 1px 1px 3px #FFFFFF;
+}
+
+header {
+  background: url("../../images/header_image.jpg");
+  background-position: 4% 20%;
+  background-repeat: no-repeat;
+}
+
+.hidden {
+  display: none;
+}
+
+.wrapper {
+  display: flex;
+  max-width: 1000px;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+}

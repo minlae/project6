@@ -132,10 +132,74 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
+body {
+  font-size: 10px;
+  color: white;
+  font-family: "Lato", sans-serif;
+  background: #8fbebd; }
+
+h1 {
+  font-size: 4.0rem;
+  font-family: "Lato", sans-serif;
+  color: #B82601;
+  margin-bottom: 100px;
+  text-shadow: 1px 1px 3px #FFFFFF; }
+
+header {
+  background: url("../../images/header_image.jpg");
+  background-position: 4% 20%;
+  background-repeat: no-repeat; }
+
+.hidden {
+  display: none; }
+
+.wrapper {
+  display: flex;
+  max-width: 1000px;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center; }
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; }
+
+.mainList {
+  display: flex;
+  flex-direction: column;
+  background-color: #febf70;
+  box-shadow: 6px 6px 18px -5px rgba(0, 0, 0, 0.75); }
+  .mainList form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+  .mainList ul {
+    padding-left: 5px;
+    list-style: none; }
+    .mainList ul li {
+      padding: 10px; }
+  .mainList .inputField {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 20px; }
+  .mainList .itemsList {
+    display: flex;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-family: "Lato", sans-serif;
+    color: #4e5353;
+    text-transform: capitalize; }
+
+.titleCard {
+  width: 30%; }
+
 .titleButton {
   width: 100%;
-  color: #4e5353;
-  background-color: #febf70;
+  color: white;
+  background-color: #B82601;
   font-size: 1.5rem;
   padding: 10px;
   border: none;
@@ -143,26 +207,29 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   margin-bottom: 50px;
   transition: .5s all; }
   .titleButton:hover {
-    background-color: white; }
+    background-color: #6c1601; }
 
-.myListButton {
+.getRandomButton {
   width: 100%;
-  color: #4e5353;
-  background-color: white;
+  color: white;
+  background-color: #fead47;
   font-size: 1.5rem;
   padding: 10px;
   border: none;
   box-shadow: 6px 6px 18px -5px rgba(0, 0, 0, 0.75);
-  margin-bottom: 50px;
+  margin-bottom: 0;
   transition: .5s all; }
-  .myListButton:hover {
-    background-color: #febf70; }
+  .getRandomButton:hover {
+    background-color: white;
+    color: #4e5353; }
 
-.getRandomButton {
-  width: 200px;
-  padding: 5px;
-  font-size: 1rem;
-  background-color: #4e5353;
+.myListButton {
+  width: 100%;
+  padding: 10px;
+  font-size: 1.5rem;
+  box-shadow: 6px 6px 18px -5px rgba(0, 0, 0, 0.75);
+  margin-top: 20px;
+  background-color: black;
   border: none;
   color: white; }
 
@@ -173,52 +240,11 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   border: none;
   font-size: 1.4rem; }
 
-body {
-  font-size: 10px;
+.addToListButton {
+  width: 50%;
+  padding: 8px 0px;
+  font-size: 1rem;
+  background-color: #4e5353;
   color: white;
-  font-family: "Lato", sans-serif;
-  background: #8fbebd; }
-
-h1 {
-  font-size: 4.0rem;
-  font-family: "Lato", sans-serif;
-  margin-bottom: 100px; }
-
-header {
-  background-color: yellow; }
-
-.hidden {
-  display: none; }
-
-.wrapper {
-  display: flex;
-  max-width: 1000px;
-  margin: 0 auto;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid blue; }
-
-.container {
-  display: flex;
-  justify-content: space-between;
-  width: 100%; }
-
-.mainList {
-  border: 1px solid purple; }
-  .mainList ul {
-    padding: 0;
-    list-style: none; }
-
-.itemsList {
-  border: 1px solid red;
-  display: flex;
-  font-size: 1.2rem;
-  font-family: "Lato", sans-serif; }
-
-.itemsContainer {
-  border: 1px solid blue; }
-
-.titleCard {
-  width: 30%; }
-  .titleCard h2 {
-    text-align: center; }
+  border: none;
+  margin-bottom: 20px; }

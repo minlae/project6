@@ -1,7 +1,7 @@
 .titleButton {
   width: 100%;
-  color: $nearBlack;
-  background-color: $goldAccent;
+  color: white;
+  background-color: $mainRed;
   font-size: 1.5rem;
   padding: 10px;
   border: none;
@@ -9,31 +9,33 @@
   margin-bottom: 50px;
   transition: .5s all;
   &:hover {
+    background-color: darken($mainRed,15);
+  }
+}
+
+.getRandomButton {
+  width: 100%;
+  color: white;
+  background-color: darken($goldAccent,8);
+  font-size: 1.5rem;
+  padding: 10px;
+  border: none;
+  box-shadow: 6px 6px 18px -5px rgba(0,0,0,0.75);
+  margin-bottom: 0;
+  transition: .5s all;
+  &:hover {
     background-color: white;
-    // darken($goldAccent,30)
+    color: $nearBlack;
   }
 }
 
 .myListButton {
   width: 100%;
-  color: $nearBlack;
-  background-color: white;
-  font-size: 1.5rem;
   padding: 10px;
-  border: none;
+  font-size: 1.5rem;
   box-shadow: 6px 6px 18px -5px rgba(0,0,0,0.75);
-  margin-bottom: 50px;
-  transition: .5s all;
-  &:hover {
-    background-color: $goldAccent;
-  }
-}
-
-.getRandomButton {
-  width: 200px;
-  padding: 5px;
-  font-size: 1rem;
-  background-color: $nearBlack;
+  margin-top: 20px;
+  background-color: black;
   border: none;
   color: white;
 }
@@ -44,4 +46,14 @@
   background: none;
   border: none;
   font-size: 1.4rem;
+}
+
+.addToListButton {
+  width: 50%;
+  padding: 8px 0px;
+  font-size: 1rem;
+  background-color: $nearBlack;
+  color: white;
+  border: none;
+  margin-bottom: 20px;
 }

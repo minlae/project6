@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import Header from './Header.js';
 import firebase from './firebase';
 
 
+// My only simple component
 const HiddenButton = (props) => {
 		return (
 			<div>
@@ -11,14 +11,6 @@ const HiddenButton = (props) => {
 			</div>
 		);
 }
-
-// when clicked looks at array of items in its component's state
-// takes a random item from that array
-// renders the random item to the page
-// ideally called on the title page... before you hit the My List button
-
-// method in the specific component? 
-// 
 
 
 // Shows Form
@@ -53,9 +45,6 @@ class ShowForm extends React.Component {
 			this.setState({
 				items: newState
 			});
-			// console.log(newState)
-			// console.log(this.state.items);
-			// the second console log (this.state) is one item behind the (newState). What?
 		});
 	}
 
@@ -87,16 +76,16 @@ class ShowForm extends React.Component {
 			<div className="mainList">
 				{this.props.random === false && (
 				<form onSubmit={this.handleSubmit}>
-					<input required type="text" name="showInput" placeholder="enter show name" onChange={this.handleChange} value={this.state.showInput}/>
-					<button>Add Show</button>
+					<input required className="inputField" type="text" name="showInput" placeholder="enter show name" onChange={this.handleChange} value={this.state.showInput}/>
+					<button className="addToListButton">Add Show</button>
 				</form>)}
-				<div className="showList">
+				<div>
 					<ul>
 						{this.state.items.map((item) => {
 							return (
-								<div className="itemsContainer">
+								<div>
 									<li className="itemsList" key={item.id}>
-										<h3>{item.rec}</h3>
+										{item.rec}
 									 	<button className="removeButton" onClick={() => this.removeItem(item.id)}>&#10008;</button>
 									</li>
 								</div>
@@ -173,20 +162,20 @@ class BookForm extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="mainList">
 				{this.props.random === false && (
 				<form onSubmit={this.handleSubmit}>
-					<input required type="text" name="bookInput" placeholder="enter book name" onChange={this.handleChange} value={this.state.bookInput}/>
-					<button>Add Book</button>
+					<input required className="inputField" type="text" name="bookInput" placeholder="enter book name" onChange={this.handleChange} value={this.state.bookInput}/>
+					<button className="addToListButton">Add Book</button>
 				</form>)}
 				<div className="bookList">
 					<ul>
 						{this.state.items.map((item) => {
 							return (
 								<div>
-									<li key={item.id}>
-										<h3>{item.rec}</h3>
-									 	<button className="removeButton" onClick={() => this.removeItem(item.id)}>Remove</button>
+									<li className="itemsList" key={item.id}>
+										{item.rec}
+									 	<button className="removeButton" onClick={() => this.removeItem(item.id)}>&#10008;</button>
 									</li>
 								</div>
 							)
@@ -264,8 +253,8 @@ class MovieForm extends React.Component {
 			<div className="mainList">
 				{this.props.random === false && (
 				<form onSubmit={this.handleSubmit}>
-					<input required type="text" name="movieInput" placeholder="enter movie name" onChange={this.handleChange} value={this.state.movieInput}/>
-					<button>Add Movie</button>
+					<input className="inputField" required type="text" name="movieInput" placeholder="enter movie name" onChange={this.handleChange} value={this.state.movieInput}/>
+					<button className="addToListButton">Add Movie</button>
 				</form>)}
 				<div className="movieList">
 					<ul>
@@ -274,7 +263,7 @@ class MovieForm extends React.Component {
 								<div>
 									<li className="itemsList" key={item.id}>
 										{item.rec}
-									 	<button className="removeButton" onClick={() => this.removeItem(item.id)}>Remove</button>
+									 	<button className="removeButton" onClick={() => this.removeItem(item.id)}>&#10008;</button>
 									</li>
 								</div>
 							)
@@ -401,13 +390,13 @@ class App extends React.Component {
 						<h1>Keeping Track of Your Recs</h1>
 					</div>
 				</header>
-				<body className="wrapper">
+				<section className="main wrapper">
 					<div className="wrapper" className="container">
 	      				<TitleCard title="Movies"/>
 	          			<TitleCard title="Shows"/>
 	          			<TitleCard title="Books"/>
 					</div>
-				</body>
+				</section>
 			
 			</div>
 		);
