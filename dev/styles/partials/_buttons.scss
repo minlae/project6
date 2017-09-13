@@ -1,0 +1,47 @@
+.titleButton {
+  width: 100%;
+  color: $nearBlack;
+  background-color: $goldAccent;
+  font-size: 1.5rem;
+  padding: 10px;
+  border: none;
+  box-shadow: 6px 6px 18px -5px rgba(0,0,0,0.75);
+  margin-bottom: 50px;
+  transition: .5s all;
+  &:hover {
+    background-color: white;
+    // darken($goldAccent,30)
+  }
+}
+
+.myListButton {
+  width: 100%;
+  color: $nearBlack;
+  background-color: white;
+  font-size: 1.5rem;
+  padding: 10px;
+  border: none;
+  box-shadow: 6px 6px 18px -5px rgba(0,0,0,0.75);
+  margin-bottom: 50px;
+  transition: .5s all;
+  &:hover {
+    background-color: $goldAccent;
+  }
+}
+
+.getRandomButton {
+  width: 200px;
+  padding: 5px;
+  font-size: 1rem;
+  background-color: $nearBlack;
+  border: none;
+  color: white;
+}
+
+.removeButton {
+  width: 35px;
+  padding: 0px;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+}

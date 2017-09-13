@@ -1,23 +1,26 @@
 @import "partials/setup";
 @import "partials/variables";
 @import "partials/mixins";
+@import "partials/itemslist";
+@import "partials/buttons";
 
 body {
   font-size: 10px; 
   color: white;
   font-family: $sansSerif;
-  // background: rgba(98,125,77,1);
+  background: $mainTeal;
 }
 
 h1 {
   font-size: 4.0rem;
   font-family: $sansSerif;
+  margin-bottom: 100px;
   // color: green;
 }
 
 header {
-  height: 100vh;
-  background-color: $mainTeal;
+  // height: 50vh;
+  background-color: yellow;
 }
 
 .hidden {
@@ -40,7 +43,26 @@ header {
   // border: 1px solid pink;
 }
 
+.mainList {
+  border: 1px solid purple;
 
+  ul {
+    padding: 0;
+    list-style: none;
+  }
+}
+
+.itemsList {
+  border: 1px solid red;
+  display: flex;
+  font-size: 1.2rem;
+  font-family: $sansSerif;
+
+}
+
+.itemsContainer {
+  border: 1px solid blue;
+}
 
 .titleCard {
   // height: 300px;
@@ -51,39 +73,6 @@ header {
     h2 {
       text-align: center;
     }
-
-    .titleButton {
-      width: 100%;
-      color: $nearBlack;
-      background-color: $goldAccent;
-      font-size: 1.5rem;
-      padding: 10px;
-      border: none;
-      box-shadow: 6px 6px 18px -5px rgba(0,0,0,0.75);
-      margin-bottom: 50px;
-      transition: .5s all;
-      &:hover {
-        background-color: white;
-        // darken($goldAccent,30)
-      }
-    }
-
-    .myListButton {
-      width: 100%;
-      color: $nearBlack;
-      background-color: white;
-      font-size: 1.5rem;
-      padding: 10px;
-      border: none;
-      box-shadow: 6px 6px 18px -5px rgba(0,0,0,0.75);
-      margin-bottom: 50px;
-      transition: .5s all;
-      &:hover {
-        background-color: $goldAccent;
-      }
-    }
 }
 
-.removeButton {
-  width: 100px;
-}
+// style form input so that first letter is capitalized

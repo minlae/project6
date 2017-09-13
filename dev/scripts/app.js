@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // import Header from './Header.js';
 import firebase from './firebase';
-import { Modal, ModalMixin, ModalEventsMixin } from 'react-modal-box';
+
 
 const HiddenButton = (props) => {
 		return (
@@ -11,7 +11,6 @@ const HiddenButton = (props) => {
 			</div>
 		);
 }
-
 
 // when clicked looks at array of items in its component's state
 // takes a random item from that array
@@ -45,6 +44,11 @@ class ShowForm extends React.Component {
 					rec: items[item].rec,
 					// what is this doing? creating an array of objects in the Firebase database
 				});
+			}
+			if (this.props.random === true) {
+				const randomIndex = Math.round(Math.random() * newState.length);
+				const randomItem = newState[randomIndex];
+				newState = [randomItem];
 			}
 			this.setState({
 				items: newState
@@ -80,19 +84,22 @@ class ShowForm extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="mainList">
+				{this.props.random === false && (
 				<form onSubmit={this.handleSubmit}>
 					<input required type="text" name="showInput" placeholder="enter show name" onChange={this.handleChange} value={this.state.showInput}/>
 					<button>Add Show</button>
-				</form>
+				</form>)}
 				<div className="showList">
 					<ul>
 						{this.state.items.map((item) => {
 							return (
-								<li key={item.id}>
-									<h3>{item.rec}</h3>
-									<button className="removeButton" onClick={() => this.removeItem(item.id)}>Remove Item</button>
-								</li>
+								<div className="itemsContainer">
+									<li className="itemsList" key={item.id}>
+										<h3>{item.rec}</h3>
+									 	<button className="removeButton" onClick={() => this.removeItem(item.id)}>&#10008;</button>
+									</li>
+								</div>
 							)
 						})}
 					</ul>
@@ -126,6 +133,11 @@ class BookForm extends React.Component {
 					rec: items[item].rec,
 					// what is this doing? creating an array of objects in the Firebase database
 				});
+			}
+			if (this.props.random === true) {
+				const randomIndex = Math.round(Math.random() * newState.length);
+				const randomItem = newState[randomIndex];
+				newState = [randomItem];
 			}
 			this.setState({
 				items: newState
@@ -162,18 +174,21 @@ class BookForm extends React.Component {
 	render() {
 		return (
 			<div>
+				{this.props.random === false && (
 				<form onSubmit={this.handleSubmit}>
 					<input required type="text" name="bookInput" placeholder="enter book name" onChange={this.handleChange} value={this.state.bookInput}/>
 					<button>Add Book</button>
-				</form>
+				</form>)}
 				<div className="bookList">
 					<ul>
 						{this.state.items.map((item) => {
 							return (
-								<li key={item.id}>
-									<h3>{item.rec}</h3>
-									<button className="removeButton" onClick={() => this.removeItem(item.id)}>Remove Item</button>
-								</li>
+								<div>
+									<li key={item.id}>
+										<h3>{item.rec}</h3>
+									 	<button className="removeButton" onClick={() => this.removeItem(item.id)}>Remove</button>
+									</li>
+								</div>
 							)
 						})}
 					</ul>
@@ -246,27 +261,26 @@ class MovieForm extends React.Component {
 
 	render() {
 		return (
-			<div className="listFadeIn">
+			<div className="mainList">
 				{this.props.random === false && (
 				<form onSubmit={this.handleSubmit}>
 					<input required type="text" name="movieInput" placeholder="enter movie name" onChange={this.handleChange} value={this.state.movieInput}/>
 					<button>Add Movie</button>
 				</form>)}
-					<div className="movieList">
-						<ul>
-							{this.state.items.map((item) => {
-								return (
-									<div>
-										<Modal />
-										<li key={item.id}>
-											<h3>{item.rec}</h3>
-										 	<button className="removeButton" onClick={() => this.removeItem(item.id)}>Remove Item</button>
-										</li>
-									</div>
-								)
-							})}
-						</ul>
-					</div>
+				<div className="movieList">
+					<ul>
+						{this.state.items.map((item) => {
+							return (
+								<div>
+									<li className="itemsList" key={item.id}>
+										{item.rec}
+									 	<button className="removeButton" onClick={() => this.removeItem(item.id)}>Remove</button>
+									</li>
+								</div>
+							)
+						})}
+					</ul>
+				</div>
 			</div>
 		)
 	}
@@ -332,11 +346,10 @@ class MyList extends React.Component {
 		// console.log(typeof this.props.type);
 		return (
 			<div className="myList">
-				<button onClick={this.showRandom}>Get Random</button>
+				<button className="getRandomButton" onClick={this.showRandom}>Get Random</button>
 				<button className="myListButton" onClick={this.handleClick}>See My List</button>
 				{this.state.showRandomItem ? this.randomItemToShow() : null}
 				{this.state.showListSection ? this.formToShow() : null}
-				{/*above says: if the state of ShowListSection is true, show BookForm, else nothing*/}
 			</div>
 		)
 	}
@@ -382,17 +395,19 @@ class TitleCard extends React.Component {
 class App extends React.Component {
 	render() {
 		return (
-			<div className='app'>
+			<div className="app">
 				<header>
-					<div className='wrapper'>
+					<div className="wrapper">
 						<h1>Keeping Track of Your Recs</h1>
-						<div className="container">
-              				<TitleCard title="Movies"/>
-	              			<TitleCard title="Shows"/>
-	              			<TitleCard title="Books"/>
-						</div>
 					</div>
 				</header>
+				<body className="wrapper">
+					<div className="wrapper" className="container">
+	      				<TitleCard title="Movies"/>
+	          			<TitleCard title="Shows"/>
+	          			<TitleCard title="Books"/>
+					</div>
+				</body>
 			
 			</div>
 		);

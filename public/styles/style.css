@@ -132,18 +132,60 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
+.titleButton {
+  width: 100%;
+  color: #4e5353;
+  background-color: #febf70;
+  font-size: 1.5rem;
+  padding: 10px;
+  border: none;
+  box-shadow: 6px 6px 18px -5px rgba(0, 0, 0, 0.75);
+  margin-bottom: 50px;
+  transition: .5s all; }
+  .titleButton:hover {
+    background-color: white; }
+
+.myListButton {
+  width: 100%;
+  color: #4e5353;
+  background-color: white;
+  font-size: 1.5rem;
+  padding: 10px;
+  border: none;
+  box-shadow: 6px 6px 18px -5px rgba(0, 0, 0, 0.75);
+  margin-bottom: 50px;
+  transition: .5s all; }
+  .myListButton:hover {
+    background-color: #febf70; }
+
+.getRandomButton {
+  width: 200px;
+  padding: 5px;
+  font-size: 1rem;
+  background-color: #4e5353;
+  border: none;
+  color: white; }
+
+.removeButton {
+  width: 35px;
+  padding: 0px;
+  background: none;
+  border: none;
+  font-size: 1.4rem; }
+
 body {
   font-size: 10px;
   color: white;
-  font-family: "Lato", sans-serif; }
+  font-family: "Lato", sans-serif;
+  background: #8fbebd; }
 
 h1 {
   font-size: 4.0rem;
-  font-family: "Lato", sans-serif; }
+  font-family: "Lato", sans-serif;
+  margin-bottom: 100px; }
 
 header {
-  height: 100vh;
-  background-color: #8fbebd; }
+  background-color: yellow; }
 
 .hidden {
   display: none; }
@@ -161,34 +203,22 @@ header {
   justify-content: space-between;
   width: 100%; }
 
+.mainList {
+  border: 1px solid purple; }
+  .mainList ul {
+    padding: 0;
+    list-style: none; }
+
+.itemsList {
+  border: 1px solid red;
+  display: flex;
+  font-size: 1.2rem;
+  font-family: "Lato", sans-serif; }
+
+.itemsContainer {
+  border: 1px solid blue; }
+
 .titleCard {
   width: 30%; }
   .titleCard h2 {
     text-align: center; }
-  .titleCard .titleButton {
-    width: 100%;
-    color: #4e5353;
-    background-color: #febf70;
-    font-size: 1.5rem;
-    padding: 10px;
-    border: none;
-    box-shadow: 6px 6px 18px -5px rgba(0, 0, 0, 0.75);
-    margin-bottom: 50px;
-    transition: .5s all; }
-    .titleCard .titleButton:hover {
-      background-color: white; }
-  .titleCard .myListButton {
-    width: 100%;
-    color: #4e5353;
-    background-color: white;
-    font-size: 1.5rem;
-    padding: 10px;
-    border: none;
-    box-shadow: 6px 6px 18px -5px rgba(0, 0, 0, 0.75);
-    margin-bottom: 50px;
-    transition: .5s all; }
-    .titleCard .myListButton:hover {
-      background-color: #febf70; }
-
-.removeButton {
-  width: 100px; }
