@@ -85,8 +85,8 @@ class ShowForm extends React.Component {
 							return (
 								<div>
 									<li className="itemsList" key={item.id}>
-										{item.rec}
 									 	<button className="removeButton" onClick={() => this.removeItem(item.id)}>&#10008;</button>
+										{item.rec}
 									</li>
 								</div>
 							)
@@ -170,8 +170,8 @@ class BookForm extends React.Component {
 							return (
 								<div>
 									<li className="itemsList" key={item.id}>
-										{item.rec}
 									 	<button className="removeButton" onClick={() => this.removeItem(item.id)}>&#10008;</button>
+										{item.rec}
 									</li>
 								</div>
 							)
@@ -254,8 +254,8 @@ class MovieForm extends React.Component {
 							return (
 								<div>
 									<li className="itemsList" key={item.id}>
-										{item.rec}
 									 	<button className="removeButton" onClick={() => this.removeItem(item.id)}>&#10008;</button>
+										{item.rec}
 									</li>
 								</div>
 							)
@@ -326,7 +326,7 @@ class MyList extends React.Component {
 	render() {
 		return (
 			<div className="myList">
-				<button className="getRandomButton" onClick={this.showRandom}>Get Random</button>
+				<button className="getRandomButton" onClick={this.showRandom}>Get random</button>
 				<button className="myListButton" onClick={this.handleClick}>See My List</button>
 				{this.state.showRandomItem ? this.randomItemToShow() : null}
 				{this.state.showListSection ? this.formToShow() : null}
@@ -377,8 +377,10 @@ class App extends React.Component {
 			<div className="app">
 				<header>
 					<div className="wrapper">
-						<h1>Rec Lists</h1>
-						<h2>Keep track of your movie, tv, and book recommendations</h2>
+						<div className="titleText">
+							<h1>rec lists</h1>
+							<h2>Create lists that keep track of your movie, tv, and book recommendations. Not sure what to watch? Click "get random" and get a random selection!</h2>
+						</div>
 					</div>
 				</header>
 				<section className="main wrapper">

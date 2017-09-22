@@ -2,6 +2,8 @@
   width: 100%;
   color: white;
   background-color: $mainRed;
+  // background-color: transparent;
+  // border: 1px dashed $goldAccent;
   font-size: 1.5rem;
   padding: 10px;
   border: none;
@@ -22,7 +24,7 @@
 .getRandomButton {
   width: 100%;
   color: white;
-  background-color: darken($goldAccent,20);
+  background-color: darken($goldAccent,40);
   font-size: 1.5rem;
   padding: 10px;
   border: none;
@@ -41,7 +43,8 @@
   font-size: 1.5rem;
   box-shadow: 6px 6px 18px -5px rgba(0,0,0,0.75);
   margin-top: 20px;
-  background-color: black;
+  // background-color: black;
+  background-color: darken($goldAccent,40);
   border: none;
   color: white;
   @include respond-to("medium") {
