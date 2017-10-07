@@ -376,11 +376,9 @@ class App extends React.Component {
 		return (
 			<div className="app">
 				<header>
-					<div className="wrapper">
-						<div className="titleText">
-							<h1>rec lists</h1>
-							<h2>Create lists that keep track of your movie, tv, and book recommendations. Not sure what to watch? Click "get random" and get a random selection!</h2>
-						</div>
+					<div className="titleText">
+						<h1>Recommendation Lists</h1>
+						<h2>Create lists that keep track of your movie, tv, and book recommendations.</h2>
 					</div>
 				</header>
 				<section className="main wrapper">
