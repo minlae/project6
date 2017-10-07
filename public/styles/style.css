@@ -197,6 +197,13 @@ h2 {
       font-size: 1rem;
       text-align: center; } }
 
+h3 {
+  font-size: 2rem;
+  font-family: "Allura", cursive;
+  color: #647283;
+  text-shadow: none;
+  text-align: center; }
+
 .hidden {
   display: none; }
 
@@ -225,7 +232,7 @@ h2 {
 .mainList {
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: #CBCFD2;
   box-shadow: 6px 6px 18px -5px rgba(0, 0, 0, 0.75); }
   .mainList form {
     display: flex;
@@ -241,7 +248,8 @@ h2 {
     padding: 10px;
     font-size: 1.2rem;
     text-align: center;
-    margin-top: 20px; }
+    margin-top: 20px;
+    background-color: #BDCBD2; }
   .mainList .itemsList {
     display: flex;
     font-size: 1.5rem;

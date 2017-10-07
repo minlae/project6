@@ -335,35 +335,66 @@ class MyList extends React.Component {
 	}
 }
 
+// class TitleCard extends React.Component {	
+// 	display two previously hidden buttons: Get Random and My List
+// 	constructor() {
+// 		super();
+// 		this.state = {
+// 			showHidden: true
+// 		}
+// 		this.handleClick = this.handleClick.bind(this);
+// 	}
+// 	handleClick() {
+// 		// Note: another way of doing this, for future reference:
+// 		// this.setState({
+// 		// 	showHidden: !this.state.showHidden
+// 		// })
+// 		if (this.state.showHidden === false) {
+// 			this.setState({
+// 				showHidden: true
+// 			});
+// 		} else {
+// 			this.setState({
+// 				showHidden: false
+// 			});
+// 		}
+// 	}
+// 	render() {
+// 		return (
+// 			<div className="titleCard">
+// 				<button className="titleButton" onClick={this.handleClick}>{this.props.title}</button>
+// 				{this.state.showHidden ? <div><HiddenButton type={this.props.title} /></div> : null}
+// 			</div>
+// 		)
+// 	}
+// }
+
+// Title Card TEST copy
 class TitleCard extends React.Component {	
 	// display two previously hidden buttons: Get Random and My List
-	constructor() {
-		super();
-		this.state = {
-			showHidden: false
-		}
-		this.handleClick = this.handleClick.bind(this);
-	}
-	handleClick() {
-		// Note: another way of doing this, for future reference:
-		// this.setState({
-		// 	showHidden: !this.state.showHidden
-		// })
-		if (this.state.showHidden === false) {
-			this.setState({
-				showHidden: true
-			});
-		} else {
-			this.setState({
-				showHidden: false
-			});
-		}
-	}
+	// constructor() {
+	// 	super();
+	// 	this.handleClick = this.handleClick.bind(this);
+	// }
+	// handleClick() {
+	// 	// Note: another way of doing this, for future reference:
+	// 	// this.setState({
+	// 	// 	showHidden: !this.state.showHidden
+	// 	// })
+	// 	if (this.state.showHidden === false) {
+	// 		this.setState({
+	// 			showHidden: true
+	// 		});
+	// 	} else {
+	// 		this.setState({
+	// 			showHidden: false
+	// 		});
+	// 	}
+	// }
 	render() {
 		return (
 			<div className="titleCard">
-				<button className="titleButton" onClick={this.handleClick}>{this.props.title}</button>
-				{this.state.showHidden ? <div><HiddenButton type={this.props.title} /></div> : null}
+				<h3>{this.props.title}</h3>
 			</div>
 		)
 	}
