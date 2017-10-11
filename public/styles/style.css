@@ -141,7 +141,15 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end; }
+  align-items: flex-end;
+  position: relative; }
+  header p {
+    font-size: 1rem;
+    color: white;
+    font-family: "Lato", sans-serif;
+    position: absolute;
+    bottom: 0;
+    left: 10px; }
   header .titleText {
     display: flex;
     flex-direction: column;

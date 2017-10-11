@@ -56,7 +56,8 @@ class ShowForm extends React.Component {
 	}
 
 	removeItem(itemId) {
-		const itemRef = firebase.database().ref(`/shows/${itemId}`)
+		const userID = firebase.auth().currentUser.uid;
+		const itemRef = firebase.database().ref(`users/${userID}/shows/${itemId}`)
 		itemRef.remove();
 	}
 
@@ -150,7 +151,8 @@ class BookForm extends React.Component {
 	}
 
 	removeItem(itemId) {
-		const itemRef = firebase.database().ref(`/books/${itemId}`)
+		const userID = firebase.auth().currentUser.uid;
+		const itemRef = firebase.database().ref(`users/${userID}/books/${itemId}`)
 		itemRef.remove();
 	}
 
@@ -262,7 +264,8 @@ class MovieForm extends React.Component {
 	}
 
 	removeItem(itemId) {
-		const itemRef = firebase.database().ref(`/movies/${itemId}`)
+		const userID = firebase.auth().currentUser.uid;
+		const itemRef = firebase.database().ref(`users/${userID}/movies/${itemId}`)
 		itemRef.remove();
 	}
 
@@ -478,6 +481,7 @@ class App extends React.Component {
 						    <button className="loginButton" onClick={this.login}>Log In</button>
 						}
 					</div>
+				    <p>&copy;2017 Milena Djokic</p>
 				</header>
 				<div className="loginMessage">
 					{this.state.user ?
@@ -497,7 +501,7 @@ class App extends React.Component {
 					    <div className="wrapper">
 					      <p>You must be logged in to access your list of recommendations.</p>
 					    </div>
-					  }
+				    }
 			  </div>			
 			</div>
 		);

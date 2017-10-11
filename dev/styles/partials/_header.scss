@@ -11,6 +11,16 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
+  position: relative;
+
+  p {
+    font-size: 1rem;
+    color: white;
+    font-family: $sansSerif;
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+  }
 
   .titleText {
     display: flex;
