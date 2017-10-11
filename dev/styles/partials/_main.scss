@@ -1,0 +1,20 @@
+.loginMessage {
+	p {
+		color: $nearBlack;
+		font-size: 1.2rem;
+		font-family: $sansSerif;
+	}
+
+	.userProfile {
+		position: fixed;
+		bottom: 20px;
+		right: 40px;
+		width: 100px;
+		height: 100px;
+
+		img {
+			border-radius: 50%;
+			max-width: 100%;
+		}
+	}
+}

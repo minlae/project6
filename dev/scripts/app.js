@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import firebase from './firebase';
+import firebase, { auth, provider } from './firebase.js';
 
 
 // My only simple component
@@ -26,25 +26,32 @@ class ShowForm extends React.Component {
 	}
 
 	componentDidMount() {
-		const itemsRef = firebase.database().ref("shows");
-		itemsRef.on("value", (snapshot) =>{
-			let items = snapshot.val();
-			let newState = [];
-			for (let item in items) {
-				newState.push({
-					id: item,
-					rec: items[item].rec,
-					// what is this doing? creating an array of objects in the Firebase database
-				});
+		auth.onAuthStateChanged((user) => {
+			if (user) {
+				// if user is true i.e. logged in, then show their list of movies. Otherwise show nothing. I suppose I can add a message? Also a message if empty
+				// console.log(user);
+				const itemsRef = firebase.database().ref(`users/${user.uid}/shows`);
+				itemsRef.on("value", (snapshot) =>{
+					let items = snapshot.val();
+					let newState = [];
+					for (let item in items) {
+						newState.push({
+							id: item,
+							rec: items[item].rec,
+							// what is this doing? creating an array of objects in the Firebase database
+						});
+					}
+					if (this.props.random === true) {
+						const randomIndex = Math.round(Math.random() * newState.length);
+						console.log(newState);
+						const randomItem = newState[randomIndex];
+						newState = [randomItem];
+					}
+					this.setState({
+						items: newState
+					});
+				});	
 			}
-			if (this.props.random === true) {
-				const randomIndex = Math.round(Math.random() * newState.length);
-				const randomItem = newState[randomIndex];
-				newState = [randomItem];
-			}
-			this.setState({
-				items: newState
-			});
 		});
 	}
 
@@ -61,7 +68,8 @@ class ShowForm extends React.Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		const itemsRef = firebase.database().ref("shows");
+		const userID = firebase.auth().currentUser.uid;
+		const itemsRef = firebase.database().ref(`users/${userID}/shows`);
 		const item = {
 			rec: this.state.showInput,
 		}
@@ -85,6 +93,7 @@ class ShowForm extends React.Component {
 							return (
 								<div>
 									<li className="itemsList" key={item.id}>
+									{console.log(item.id)}
 									 	<button className="removeButton" onClick={() => this.removeItem(item.id)}>&#10008;</button>
 										{item.rec}
 									</li>
@@ -112,25 +121,32 @@ class BookForm extends React.Component {
 	}
 
 	componentDidMount() {
-		const itemsRef = firebase.database().ref("books");
-		itemsRef.on("value", (snapshot) =>{
-			let items = snapshot.val();
-			let newState = [];
-			for (let item in items) {
-				newState.push({
-					id: item,
-					rec: items[item].rec,
+		auth.onAuthStateChanged((user) => {
+			if (user) {
+				// if user is true i.e. logged in, then show their list of movies. Otherwise show nothing. I suppose I can add a message? Also a message if empty
+				// console.log(user);
+				const itemsRef = firebase.database().ref(`users/${user.uid}/books`);
+				itemsRef.on("value", (snapshot) =>{
+					let items = snapshot.val();
+					let newState = [];
+					for (let item in items) {
+						newState.push({
+							id: item,
+							rec: items[item].rec,
+						});
+					}
+					if (this.props.random === true) {
+						const randomIndex = Math.round(Math.random() * newState.length);
+						const randomItem = newState[randomIndex];
+						newState = [randomItem];
+					}
+					this.setState({
+						items: newState
+					});
 				});
 			}
-			if (this.props.random === true) {
-				const randomIndex = Math.round(Math.random() * newState.length);
-				const randomItem = newState[randomIndex];
-				newState = [randomItem];
-			}
-			this.setState({
-				items: newState
-			});
 		});
+		
 	}
 
 	removeItem(itemId) {
@@ -146,7 +162,8 @@ class BookForm extends React.Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		const itemsRef = firebase.database().ref("books");
+		const userID = firebase.auth().currentUser.uid;
+		const itemsRef = firebase.database().ref(`users/${userID}/books`);
 		const item = {
 			rec: this.state.bookInput,
 		}
@@ -196,25 +213,52 @@ class MovieForm extends React.Component {
 	}
 
 	componentDidMount() {
-		const itemsRef = firebase.database().ref("movies");
-		itemsRef.on("value", (snapshot) =>{
-			let items = snapshot.val();
-			let newState = [];
-			for (let item in items) {
-				newState.push({
-					id: item,
-					rec: items[item].rec,
+		auth.onAuthStateChanged((user) => {
+			if (user) {
+				// if user is true i.e. logged in, then show their list of movies. Otherwise show nothing. I suppose I can add a message? Also a message if empty
+				// console.log(user);
+				const itemsRef = firebase.database().ref(`users/${user.uid}/movies`);
+				itemsRef.on("value", (snapshot) =>{
+					let items = snapshot.val();
+					let newState = [];
+					for (let item in items) {
+						newState.push({
+							id: item,
+							rec: items[item].rec,
+						});
+					}
+					if (this.props.random === true) {
+						const randomIndex = Math.round(Math.random() * newState.length);
+						console.log(newState.length);
+						console.log(newState);
+						const randomItem = newState[randomIndex];
+						newState = [randomItem];
+					}
+					this.setState({
+						items: newState
+					});
 				});
 			}
-			if (this.props.random === true) {
-				const randomIndex = Math.round(Math.random() * newState.length);
-				const randomItem = newState[randomIndex];
-				newState = [randomItem];
-			}
-			this.setState({
-				items: newState
-			});
 		});
+		// const itemsRef = firebase.database().ref("movies");
+		// itemsRef.on("value", (snapshot) =>{
+		// 	let items = snapshot.val();
+		// 	let newState = [];
+		// 	for (let item in items) {
+		// 		newState.push({
+		// 			id: item,
+		// 			rec: items[item].rec,
+		// 		});
+		// 	}
+		// 	if (this.props.random === true) {
+		// 		const randomIndex = Math.round(Math.random() * newState.length);
+		// 		const randomItem = newState[randomIndex];
+		// 		newState = [randomItem];
+		// 	}
+		// 	this.setState({
+		// 		items: newState
+		// 	});
+		// });
 	}
 
 	removeItem(itemId) {
@@ -230,7 +274,9 @@ class MovieForm extends React.Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		const itemsRef = firebase.database().ref("movies");
+		// making it so you can only see your own movies:
+		const userID = firebase.auth().currentUser.uid;
+		const itemsRef = firebase.database().ref(`users/${userID}/movies`);
 		const item = {
 			rec: this.state.movieInput,
 		}
@@ -335,74 +381,90 @@ class MyList extends React.Component {
 	}
 }
 
-// class TitleCard extends React.Component {	
-// 	display two previously hidden buttons: Get Random and My List
-// 	constructor() {
-// 		super();
-// 		this.state = {
-// 			showHidden: true
-// 		}
-// 		this.handleClick = this.handleClick.bind(this);
-// 	}
-// 	handleClick() {
-// 		// Note: another way of doing this, for future reference:
-// 		// this.setState({
-// 		// 	showHidden: !this.state.showHidden
-// 		// })
-// 		if (this.state.showHidden === false) {
-// 			this.setState({
-// 				showHidden: true
-// 			});
-// 		} else {
-// 			this.setState({
-// 				showHidden: false
-// 			});
-// 		}
-// 	}
-// 	render() {
-// 		return (
-// 			<div className="titleCard">
-// 				<button className="titleButton" onClick={this.handleClick}>{this.props.title}</button>
-// 				{this.state.showHidden ? <div><HiddenButton type={this.props.title} /></div> : null}
-// 			</div>
-// 		)
-// 	}
-// }
-
-// Title Card TEST copy
 class TitleCard extends React.Component {	
 	// display two previously hidden buttons: Get Random and My List
-	// constructor() {
-	// 	super();
-	// 	this.handleClick = this.handleClick.bind(this);
-	// }
-	// handleClick() {
-	// 	// Note: another way of doing this, for future reference:
-	// 	// this.setState({
-	// 	// 	showHidden: !this.state.showHidden
-	// 	// })
-	// 	if (this.state.showHidden === false) {
-	// 		this.setState({
-	// 			showHidden: true
-	// 		});
-	// 	} else {
-	// 		this.setState({
-	// 			showHidden: false
-	// 		});
-	// 	}
-	// }
+	constructor() {
+		super();
+		this.state = {
+			showHidden: true
+		}
+		this.handleClick = this.handleClick.bind(this);
+	}
+	handleClick() {
+		// Note: another way of doing this, for future reference:
+		// this.setState({
+		// 	showHidden: !this.state.showHidden
+		// })
+		if (this.state.showHidden === false) {
+			this.setState({
+				showHidden: true
+			});
+		} else {
+			this.setState({
+				showHidden: false
+			});
+		}
+	}
 	render() {
 		return (
 			<div className="titleCard">
-				<h3>{this.props.title}</h3>
+				<button className="titleButton" onClick={this.handleClick}>{this.props.title}</button>
+				{this.state.showHidden ? <div><HiddenButton type={this.props.title} /></div> : null}
 			</div>
 		)
 	}
 }
 
+// Title Card TEST copy
+// class TitleCard extends React.Component {	
+// 	render() {
+// 		return (
+// 			<div className="titleCard">
+// 				<h3>{this.props.title}</h3>
+// 			</div>
+// 		)
+// 	}
+// }
+
 
 // App Class
 class App extends React.Component {
+	constructor() {
+		super();
+		this.state ={
+			user: null
+		}
+		this.login = this.login.bind(this);
+		this.logout = this.logout.bind(this);
+	}
+
+	componentDidMount() {
+		auth.onAuthStateChanged((user) => {
+			if (user) {
+				this.setState({ user });
+			}
+		});
+	}
+
+	logout() {
+		auth.signOut()
+		 .then(() => {
+		 	this.setState({
+		 		user: null
+		 	});
+		 });
+	}
+
+	login() {
+		auth.signInWithPopup(provider) 
+		  .then((result) => {
+		    const user = result.user;
+		    this.setState({
+		      user
+		    });
+		  });
+	}
+
 	render() {
 		return (
 			<div className="app">
@@ -410,19 +472,33 @@ class App extends React.Component {
 					<div className="titleText">
 						<h1>Recommendation Lists</h1>
 						<h2>Create lists that keep track of your movie, tv, and book recommendations.</h2>
+						{this.state.user ?
+						    <button className="logoutButton" onClick={this.logout}>Log Out</button>
+						    :
+						    <button className="loginButton" onClick={this.login}>Log In</button>
+						}
 					</div>
 				</header>
-				<section className="main wrapper">
-					<div className="wrapper" className="container">
-	      				<TitleCard title="Movies"/>
-	          			<TitleCard title="Shows"/>
-	          			<TitleCard title="Books"/>
-					</div>
-				</section>
-				<footer>
-					<p>&copy; 2017 Milena Djokic</p>
-				</footer>
-			
+				<div className="loginMessage">
+					{this.state.user ?
+					    <div>
+			    			<section className="main wrapper">
+			    				<div className="wrapper" className="container">
+			          				<TitleCard title="Movies"/>
+			              			<TitleCard title="Shows"/>
+			              			<TitleCard title="Books"/>
+			    				</div>
+			    			</section>
+					      <div className="userProfile">
+					        <img src={this.state.user.photoURL} />
+					      </div>
+					    </div>
+					    :
+					    <div className="wrapper">
+					      <p>You must be logged in to access your list of recommendations.</p>
+					    </div>
+					  }
+			  </div>			
 			</div>
 		);
 	}
@@ -430,3 +506,14 @@ class App extends React.Component {
 
 ReactDOM.render(<App />, document.getElementById('app'));
 
+// PSEUDOCODE FOR USER LISTS:
+// display only list items submitted by CURRENT USER
+// show item only if added by current user
+// if item not added by current user, don't display it
+// ok to show heading buttons
+
+// Need to track user who submitted item
+// Right at render - before mapping? if there is a user display only items added by that user. Otherwise display "add something"?
+
+// can probably use filter = to only return items added by user
+// but still need to specify somewhere that user added item
