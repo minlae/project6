@@ -1,22 +1,26 @@
 .titleButton {
   width: 100%;
-  color: white;
-  background-color: $mainRed;
+  color: $nearBlack;
+  background-color: $mainTeal;
   // background-color: transparent;
   // border: 1px dashed $goldAccent;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 10px;
   border: none;
   box-shadow: 6px 6px 18px -5px rgba(0,0,0,0.75);
   margin-bottom: 50px;
   transition: .5s all;
   &:hover {
-    background-color: darken($mainRed,15);
+    background-color: darken($mainTeal,15);
   }
 
   @include respond-to("medium") {
     margin-top: 30px;
     margin-bottom: 30px;
+  }
+  
+  @include respond-to("small") {
+    font-size: 1rem;
   }
 
 }
@@ -25,7 +29,7 @@
   width: 100%;
   color: white;
   background-color: darken($goldAccent,40);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 10px;
   border: none;
   box-shadow: 6px 6px 18px -5px rgba(0,0,0,0.75);
@@ -35,12 +39,16 @@
     background-color: white;
     color: $nearBlack;
   }
+
+  @include respond-to("small") {
+    font-size: 1rem;
+  }
 }
 
 .myListButton {
   width: 100%;
   padding: 10px;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   box-shadow: 6px 6px 18px -5px rgba(0,0,0,0.75);
   margin-top: 20px;
   // background-color: black;
@@ -50,6 +58,10 @@
   @include respond-to("medium") {
     // margin-bottom: 20px;
     margin-top: 10px;
+  }
+
+  @include respond-to("small") {
+    font-size: 1rem;
   }
 }
 
@@ -80,6 +92,11 @@
   width: 100px;
   margin-top: 20px;
   border: none;
+  @include respond-to("small") {
+    font-size: 0.7rem;
+    padding: 8px;
+    width: 80px
+  }
 }
 
 .logoutButton {
@@ -91,4 +108,10 @@
   width: 100px;
   margin-top: 20px;
   border: none;
+
+  @include respond-to("small") {
+    font-size: 0.7rem;
+    padding: 8px;
+    width: 80px
+  }
 }

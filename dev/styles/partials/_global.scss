@@ -18,6 +18,12 @@ h1 {
   @include respond-to(medium) {
     font-size: 3rem;
     margin-top: 30px;
+    text-align: left;
+  }
+
+  @include respond-to(small) {
+    font-size: 2.3rem;
+    text-align: center;
   }
 }
 
@@ -38,8 +44,13 @@ h2 {
 
   @include respond-to("medium") {
     font-size: 1rem;
-    text-align: center;
+    text-align: left;
     // padding-bottom: 30px;
+  }
+
+  @include respond-to("small") {
+    font-size: 0.8rem;
+    text-align: center;
   }
 }
 

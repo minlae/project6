@@ -3,6 +3,10 @@
 		color: $nearBlack;
 		font-size: 1.2rem;
 		font-family: $sansSerif;
+
+		@include respond-to("small") {
+		  font-size: 0.8rem;
+		}
 	}
 
 	.userProfile {
@@ -11,6 +15,16 @@
 		right: 40px;
 		width: 100px;
 		height: 100px;
+
+		@include respond-to("medium") {
+			right: 20px;
+			width: 90px;
+			height: 90px;
+		}
+
+		@include respond-to("small") {
+			display: none;
+		}
 
 		img {
 			border-radius: 50%;
