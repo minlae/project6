@@ -10,17 +10,31 @@
 	}
 
 	.userProfile {
+
+		@include respond-to("xlarge") {
+			position: fixed;
+			bottom: 20px;
+			right: 40px;
+			width: 100px;
+			height: 100px;
+		}
+		// @include respond-to("large") {
+		// 	display: none;
+		// }
+		
+		display: block;
 		position: fixed;
 		bottom: 20px;
-		right: 40px;
-		width: 100px;
-		height: 100px;
-
-		@include respond-to("medium") {
-			right: 20px;
-			width: 90px;
-			height: 90px;
-		}
+		right: 20px;
+		width: 90px;
+		height: 90px;
+		
+	
+		// @include respond-to("medium") {
+		// 	right: 20px;
+		// 	width: 90px;
+		// 	height: 90px;
+		// }
 
 		@include respond-to("small") {
 			display: none;

@@ -55,6 +55,11 @@
   background-color: darken($goldAccent,40);
   border: none;
   color: white;
+
+  &:hover {
+    background-color: white;
+    color: $nearBlack;
+  }
   @include respond-to("medium") {
     // margin-bottom: 20px;
     margin-top: 10px;

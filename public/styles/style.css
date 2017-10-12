@@ -137,7 +137,7 @@ header {
   background-position-y: 6%;
   background-repeat: no-repeat;
   background-size: 100%;
-  height: 45vh;
+  height: 55vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -149,7 +149,7 @@ header {
   @media (max-width: 768px) {
     header {
       background-size: 100%;
-      height: 30vh;
+      height: 40vh;
       padding: 0; } }
   @media (max-width: 480px) {
     header {
@@ -258,6 +258,9 @@ h3 {
   width: 100%;
   margin-bottom: 240px;
   margin-top: 40px; }
+  @media (min-width: 769px) {
+    .container {
+      width: 90%; } }
   @media (max-width: 768px) {
     .container {
       flex-direction: column;
@@ -356,6 +359,9 @@ h3 {
   background-color: #8c8c8c;
   border: none;
   color: white; }
+  .myListButton:hover {
+    background-color: white;
+    color: #4e5353; }
   @media (max-width: 768px) {
     .myListButton {
       margin-top: 10px; } }
@@ -418,16 +424,19 @@ h3 {
       font-size: 0.8rem; } }
 
 .loginMessage .userProfile {
+  display: block;
   position: fixed;
   bottom: 20px;
-  right: 40px;
-  width: 100px;
-  height: 100px; }
-  @media (max-width: 768px) {
+  right: 20px;
+  width: 90px;
+  height: 90px; }
+  @media (min-width: 1500px) {
     .loginMessage .userProfile {
-      right: 20px;
-      width: 90px;
-      height: 90px; } }
+      position: fixed;
+      bottom: 20px;
+      right: 40px;
+      width: 100px;
+      height: 100px; } }
   @media (max-width: 480px) {
     .loginMessage .userProfile {
       display: none; } }
